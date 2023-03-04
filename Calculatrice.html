@@ -124,6 +124,7 @@ let currentOp="";
 let previousOp="";
 let op = undefined;
 
+
 function addNumero(num){
 if(currentOp=="0") {
     currentOp = num;
@@ -131,11 +132,34 @@ if(currentOp=="0") {
     currentOp = currentOp + num;
 }
 }
-function choisirOperation(operation){
+
+
+
+function miseAJour(operation) {
     op = operation;
     previousOp = currentOp + op;
     currentOp = "0";
 }
+
+
+function choisirOperation(operation){
+    if(operation==" - "){
+       if(op==undefined){
+            miseAJour(operation);}
+        else { if(currentOp=='' || currentOp=='0')
+                    currentOp = "-" ;
+               else {            
+                    calculer(op);          
+                    miseAJour(operation); }} }
+    else {
+        if(op==undefined){
+            miseAJour(operation); } 
+        else {
+            calculer(op);
+            miseAJour(operation);    }}
+}
+
+
 function afficherEcran(){
     document.getElementById("current").innerHTML = currentOp;
     document.getElementById("previous").innerHTML = previousOp;
@@ -189,6 +213,7 @@ function calculer(x) {
     }
     currentOp = resultat + "";
     previousOp = "";
+    op=undefined;
 }
  // ce code est pour le boutton égal =
  let egal = document.getElementById("egal");
@@ -212,10 +237,10 @@ function calculer(x) {
   // SUPPRIMER
   let buttonDelete = document.getElementById("DEL");
   buttonDelete.addEventListener("click",()=>{
-    if(currentOp != ""){
+    
         currentOp = currentOp.slice(0,-1);
         afficherEcran();
-    }
+    
   })
 
 </script>
